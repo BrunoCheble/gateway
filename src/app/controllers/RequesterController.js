@@ -6,7 +6,7 @@ class RequesterController {
         const { _groupId } = req.params;
         const bot = await Bot.findOneAndUpdate({ _groupId, active: true }, {}).sort([['updatedAt', 1]]);
         const { type, url } = bot._doc;
-        
+
         axios({
             method: type,
             url,
@@ -15,7 +15,7 @@ class RequesterController {
             console.log(response);
         });
 
-        return res.json({ type, url, data: req.body });
+        return res.json({ type, url, data: req.headers });
     }
 }
 
